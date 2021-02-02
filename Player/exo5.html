@@ -1,24 +1,35 @@
 
 <!-- saved from url=(0050)https://vbarreaud.github.io/JS_TP_1/exo5/exo5.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<title>PLAYER</title>
 		<style type="text/css">
-			#navlist{position:relative;}
-			#navlist li{margin:0;padding:0;list-style:none;position:absolute;top:0;}
-			#navlist li,#navlist a{height:60px;display:block;}
-			#play{left:0px;width:47px;}
-			#play{background-image:url("./exo5_files/image.png"); border:black; border-width: 1px; width:300px; height:300px!important; background-repeat:no-repeat; background-size:300px 300px}
+			
 		</style>
 		<script language="Javascript" src="./exo5_files/point.js.download"></script>
 		<script> 
+
+		function init(){
 			var i=1; 
 			var j=1; 
 			var aCanvas;
-			function init()
+			var audio1;
+			initCanvas();
+			initAudio();
+
+			function initCanvas()
 			{
 				aCanvas=document.getElementById('myCanvas');
 				aCanvas.addEventListener("click",updateCanvas);
-				console.log("init");
+				console.log("initCanvas");
 
+			}
+
+			function initAudio()
+			{
+				audio1=document.getElementById("audioWav");
+				audio1.addEventListener("timeupdate",updateCanvas);
+				console.log("initAudio");
 			}
 
 			function updateCanvas()
@@ -36,6 +47,8 @@
 				}
 			}
 
+		}
+			
 		</script>
 	</head>
 	<body onload="init()">
@@ -43,7 +56,7 @@
 		<canvas id="myCanvas" width="200" height="200"></canvas>
 	
 		<audio controls>
-			<source src="audio/Slow.wav" type="audio/wav">
+			<source src="audio/Slow.wav" type="audio/wav" id="audioWav">
 		</audio>
 
 </body></html>
