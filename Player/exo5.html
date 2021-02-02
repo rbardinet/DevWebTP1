@@ -18,6 +18,7 @@
 				aCanvas=document.getElementById('myCanvas');
 				aCanvas.addEventListener("click",updateCanvas);
 				console.log("init");
+
 			}
 
 			function updateCanvas()
@@ -38,10 +39,11 @@
 		</script>
 	</head>
 	<body onload="init()">
+
 		<canvas id="myCanvas" width="200" height="200"></canvas>
-		<ul id="navlist">
-			<li id="play">
-		</li></ul>
 	
+		<audio controls>
+			<source src="audio/Slow.wav" type="audio/wav">
+		</audio>
 
 </body></html>
