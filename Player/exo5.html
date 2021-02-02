@@ -42,7 +42,7 @@
 			function drawCircle()
 			{
 				console.log("drawCircle summoned");
-				context.arc(50, 50, 50, Math.PI, currentAngle , false);
+				context.arc(100, 100, 50, Math.PI, currentAngle , false);
 				context.stroke();
 
 			}
@@ -55,7 +55,7 @@
 				var w = context.canvas.width;
 				context.canvas.width = 1;
 				context.canvas.width = w;
-				context.arc(50, 50, 50, Math.PI, currentAngle , false);
+				context.arc(100, 100, 50, Math.PI, currentAngle , false);
 				context.stroke();
 			}
 
@@ -82,7 +82,7 @@
 	</head>
 	<body onload="init()">
 
-		<canvas id="myCanvas" width="200" height="200"></canvas>
+		<canvas id="myCanvas" width="320" height="200"></canvas>
 		
 	
 		<audio controls id="audioWav">
