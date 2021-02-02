@@ -1,0 +1,43 @@
+
+<!-- saved from url=(0050)https://vbarreaud.github.io/JS_TP_1/exo5/exo5.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<style type="text/css">
+			#navlist{position:relative;}
+			#navlist li{margin:0;padding:0;list-style:none;position:absolute;top:0;}
+			#navlist li,#navlist a{height:60px;display:block;}
+			#play{left:0px;width:47px;}
+			#play{background-image:url("./exo5_files/image.png"); border:black; border-width: 1px; width:300px; height:300px!important; background-repeat:no-repeat; background-size:300px 300px}
+		</style>
+		<script language="Javascript" src="./exo5_files/point.js.download"></script>
+		<script> 
+			var i=1; 
+			var j=1; 
+			var aCanvas;
+			function init()
+			{
+				aCanvas=document.getElementById('myCanvas');
+			}
+
+			function updateCanvas()
+			{
+				if(j<10)
+				{
+					if(i>9){
+						i=1;
+						j++;
+					}
+					point1=new Point(20*i,20*j,aCanvas);
+					point1.ache();
+					i++;
+				}
+			}
+		</script>
+	</head>
+	<body onload="init()">
+		<canvas id="myCanvas" width="200" height="200"></canvas>
+		<ul id="navlist">
+			<li id="play" onclick="updateCanvas()">
+		</li></ul>
+	
+
+</body></html>
