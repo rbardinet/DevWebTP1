@@ -14,13 +14,19 @@
 			var j=1; 
 			var aCanvas;
 			var audio1;
+			var context;
+			var currentAngle = Math.PI;
 			initCanvas();
 			initAudio();
+
+			var currentAngle = Math.PI;
+			drawCircle();
 
 			function initCanvas()
 			{
 				aCanvas=document.getElementById('myCanvas');
 				aCanvas.addEventListener("click",updateCanvas);
+				context = aCanvas.getContext("2d");
 				console.log("initCanvas");
 
 			}
@@ -28,9 +34,32 @@
 			function initAudio()
 			{
 				audio1=document.getElementById("audioWav");
-				audio1.addEventListener("timeupdate",updateCanvas);
+				//audio1.addEventListener("timeupdate",updateCanvas);
+				audio1.addEventListener("timeupdate",updateCircle);
 				console.log("initAudio");
 			}
+
+			function drawCircle()
+			{
+				console.log("drawCircle summoned");
+				context.arc(50, 50, 50, Math.PI, currentAngle , false);
+				context.stroke();
+
+			}
+
+			function updateCircle()
+			{
+				currentAngle = Math.PI + (audio1.currentTime/audio1.duration)*Math.PI;
+				console.log("update summoned");
+				context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+				var w = context.canvas.width;
+				context.canvas.width = 1;
+				context.canvas.width = w;
+				context.arc(50, 50, 50, Math.PI, currentAngle , false);
+				context.stroke();
+			}
+
+			
 
 			function updateCanvas()
 			{
@@ -54,9 +83,10 @@
 	<body onload="init()">
 
 		<canvas id="myCanvas" width="200" height="200"></canvas>
+		
 	
-		<audio controls>
-			<source src="audio/Slow.wav" type="audio/wav" id="audioWav">
+		<audio controls id="audioWav">
+			<source src="audio/Slow.wav" type="audio/wav">
 		</audio>
 
 </body></html>
