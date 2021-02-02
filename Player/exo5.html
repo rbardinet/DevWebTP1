@@ -16,10 +16,13 @@
 			function init()
 			{
 				aCanvas=document.getElementById('myCanvas');
+				aCanvas.addEventListener("click",updateCanvas);
+				console.log("init");
 			}
 
 			function updateCanvas()
 			{
+				console.log("updateCanvas");
 				if(j<10)
 				{
 					if(i>9){
@@ -31,12 +34,13 @@
 					i++;
 				}
 			}
+
 		</script>
 	</head>
 	<body onload="init()">
 		<canvas id="myCanvas" width="200" height="200"></canvas>
 		<ul id="navlist">
-			<li id="play" onclick="updateCanvas()">
+			<li id="play">
 		</li></ul>
 	
 
