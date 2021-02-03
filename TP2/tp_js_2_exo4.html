@@ -2,7 +2,7 @@
 <!-- saved from url=(0050)https://vbarreaud.github.io/JS_TP_1/exo5/exo5.html -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-		<title>WAIT AND MOVE</title>
+		<title>3</title>
 		<style type="text/css">	
 		</style>
 
@@ -20,6 +20,8 @@
 			console.log("initCanvas2");
 			var CptInterval;
 
+			let mclock = 0;
+
 			function initCanvas()
 				{
 					mainCanvas=document.getElementById('myCanvas');
@@ -29,14 +31,55 @@
 					CptInterval = setInterval(waiter, 100);
 					console.log("initCanvas");
 
-				}
+			}
 			
+			class Square {
+				constructor(x,y){
+					this.x = x;
+					this.y = y;
+				}
+
+				clear(){
+					this.context.clearRect(this.x, this.y, this.width, this.height);
+				}
+
+				update(){
+					if((this.hasStarted == false) && (this.delay<wallClock)){
+						console.log("starting");
+						this.hasStarted=true;
+					}
+
+
+					if( (this.hasStarted == true) && (wallClock%this.speed == 0)){
+						if (this.frameIndex < this.numberOfFrames - 1) {	
+							this.frameIndex += 1;
+						}else {
+							this.frameIndex = 0;
+						}
+					}
+				}
+
+				draw(x,y){
+					if(x<=ctx.canvas.width - 50){
+					resetCanvas();
+					ctx.beginPath();
+					ctx.rect(x,0,50,50);
+					ctx.fillStyle="red";
+					ctx.fill();
+					x += pixPs;
+					}else{
+						clearInterval(CptInterval);
+					}
+				}
+
+
+			}
 
 			function waiter(){
-				//console.log("in waiter");
+				console.log("in waiter");
 				if(waitbuffer<waittime){
 					waitbuffer+=100;
-					//console.log("add 100 to waitbuffer");
+					console.log("add 100 to waitbuffer");
 				}else{
 					clearInterval(CptInterval);
 					CptInterval = setInterval(updateCanvas, 100);
