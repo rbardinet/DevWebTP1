@@ -1,0 +1,63 @@
+
+<!-- saved from url=(0050)https://vbarreaud.github.io/JS_TP_1/exo5/exo5.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<title>GETFETCh</title>
+		<style type="text/css">	
+		</style>
+
+		<script>
+
+		var mainCanvas;
+		var ctx;
+		
+
+		function initMain(){
+
+			mainCanvas=document.getElementById('myCanvas');
+			ctx = mainCanvas.getContext("2d");
+			mainCanvas.addEventListener("click",updateCanvas);
+
+			function getX(text){
+				var res = text.split(":");
+				var res2 = res[1].split(",");
+				return res2[0];
+			}
+
+			function getY(text){
+				var res = text.split(":");
+				var res2 = res[2].split("}");
+				return res2[0];
+			}
+
+			function updateCanvas(){
+				
+				console.log("updating the canvas");
+				const xhr = new XMLHttpRequest()
+				xhr.onreadystatechange = () => {
+				if (xhr.readyState === 4) {
+					xhr.status === 200 ? console.log(xhr.responseText) : console.error('error');
+				}
+				}
+				xhr.open('GET', 'https://stwom.herokuapp.com/4');
+				xhr.send();
+
+				console.log(getX(xhr.responseText));
+
+
+			}
+
+			
+
+		}
+
+
+		</script>
+
+	</head>
+	<body onload="initMain()">
+
+		<canvas id="myCanvas" width="600" height="600" style="border: 1px solid rgb(140, 107, 202);"></canvas>
+	
+
+</body></html>
