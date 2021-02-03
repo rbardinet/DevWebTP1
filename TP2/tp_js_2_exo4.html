@@ -8,24 +8,27 @@
 
 		<script>
 
-		function initMain(){
-
-			var mainCanvas;
-			var ctx;
+			let mclock = 0;
+			const objectsInGame = new Array();
 			var x = 0;
 			var pixPs = 10;
 			var waittime=2000;
 			var waitbuffer=0;
-			initCanvas();
-			console.log("initCanvas2");
 			var CptInterval;
 
-			let mclock = 0;
+		function initMain(){
+
+			var mainCanvas;
+			var ctx;
+			
+			initCanvas();
+			console.log("initCanvas2");
+			
+
 
 			function initCanvas()
 				{
 					mainCanvas=document.getElementById('myCanvas');
-					ctx = mainCanvas.getContext("2d");
 					mainCanvas.addEventListener("click",updateCanvas);
 					updateCanvas();
 					CptInterval = setInterval(waiter, 100);
@@ -33,7 +36,31 @@
 
 			}
 			
-			class Square {
+		}
+
+		function waiter(){
+			//console.log("in waiter");
+			if(waitbuffer<waittime){
+				waitbuffer+=100;
+				//console.log("add 100 to waitbuffer");
+			}else{
+				clearInterval(CptInterval);
+				CptInterval = setInterval(updateCanvas, 100);
+			}
+		}
+
+		function updateCanvas(){
+			
+		}
+
+		function resetCanvas(){
+			ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+			var w = ctx.canvas.width;
+			ctx.canvas.width = 1;
+			ctx.canvas.width = w;
+		}
+
+		class Square{
 				constructor(x,y){
 					this.x = x;
 					this.y = y;
@@ -60,54 +87,43 @@
 				}
 
 				draw(x,y){
-					if(x<=ctx.canvas.width - 50){
+					console.log("draw");
+					if(x<=this.context.canvas.width - 50){
 					resetCanvas();
-					ctx.beginPath();
-					ctx.rect(x,0,50,50);
-					ctx.fillStyle="red";
-					ctx.fill();
+					this.context.beginPath();
+					this.context.rect(x,0,50,50);
+					this.context.fillStyle="red";
+					this.context.fill();
 					x += pixPs;
 					}else{
 						clearInterval(CptInterval);
 					}
 				}
-
-
 			}
 
-			function waiter(){
-				console.log("in waiter");
-				if(waitbuffer<waittime){
-					waitbuffer+=100;
-					console.log("add 100 to waitbuffer");
-				}else{
-					clearInterval(CptInterval);
-					CptInterval = setInterval(updateCanvas, 100);
-				}
+		/*	
+		class Rectangle {
+  					constructor(hauteur, largeur) {
+    					this.hauteur = hauteur;
+    					this.largeur = largeur;
+  					}
+  					get area() {
+    					return this.calcArea();
+  					}
+
+  					calcArea() {
+    					return this.largeur * this.hauteur;
+  					}
 			}
 
-			function updateCanvas(){
-				console.log("updateCanvas");
-				if(x<=ctx.canvas.width - 50){
-					resetCanvas();
-					ctx.beginPath();
-					ctx.rect(x,0,50,50);
-					ctx.fillStyle="red";
-					ctx.fill();
-					x += pixPs;
-				}else{
-					clearInterval(CptInterval);
-				}
-			}
+		const carré = new Rectangle(10, 10);
+		console.log('LOG REC ' + carré.area);
+*/
 
-			function resetCanvas(){
-				ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-				var w = ctx.canvas.width;
-				ctx.canvas.width = 1;
-				ctx.canvas.width = w;
-			}
+		const square1 = new Square(0,0);
+		objectsInGame.push(square1);
+		square1.draw(0,0);
 
-		}
 
 		</script>
 
