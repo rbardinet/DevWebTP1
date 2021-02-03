@@ -35,7 +35,8 @@
 					resetCanvas();
 					ctx.beginPath();
 					ctx.rect(x,0,50,50);
-					ctx.stroke();
+					ctx.fillStyle="red";
+					ctx.fill();
 					x += pixPs;
 				}else{
 					clearInterval(CptInterval);
