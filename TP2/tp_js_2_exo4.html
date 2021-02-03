@@ -8,18 +8,18 @@
 
 		<script>
 
-			let mclock = 0;
-			const objectsInGame = new Array();
-			var x = 0;
-			var pixPs = 10;
-			var waittime=2000;
-			var waitbuffer=0;
-			var CptInterval;
+		
 
 		function initMain(){
 
+			const objectsInGame = new Array();
+			var x = 0;
+			var pixPs = 10;
+			var waittime=1000000;
+			var waitbuffer=0;
+			var SquareInter = 1000;
+			var CptInterval;
 			var mainCanvas;
-			var ctx;
 			
 			initCanvas();
 			console.log("initCanvas2");
@@ -29,100 +29,100 @@
 			function initCanvas()
 				{
 					mainCanvas=document.getElementById('myCanvas');
-					mainCanvas.addEventListener("click",updateCanvas);
-					updateCanvas();
-					CptInterval = setInterval(waiter, 100);
 					console.log("initCanvas");
 
 			}
 			
-		}
+		
 
-		function waiter(){
-			//console.log("in waiter");
-			if(waitbuffer<waittime){
-				waitbuffer+=100;
-				//console.log("add 100 to waitbuffer");
-			}else{
-				clearInterval(CptInterval);
-				CptInterval = setInterval(updateCanvas, 100);
-			}
-		}
+			function waiter(){
+				//console.log("in waiter");
+				if(true){
+					waitbuffer+=100;
+					//console.log("add 100 to waitbuffer");
+					resetCanvas();
 
-		function updateCanvas(){
-			
-		}
 
-		function resetCanvas(){
-			ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-			var w = ctx.canvas.width;
-			ctx.canvas.width = 1;
-			ctx.canvas.width = w;
-		}
+					
+					
+					for (var i=0; i<objectsInGame.length; i++){
 
-		class Square{
-				constructor(x,y){
-					this.x = x;
-					this.y = y;
-				}
+						if(Math.floor(waitbuffer/SquareInter)>=i){
 
-				clear(){
-					this.context.clearRect(this.x, this.y, this.width, this.height);
-				}
+							console.log("i = "+i);
 
-				update(){
-					if((this.hasStarted == false) && (this.delay<wallClock)){
-						console.log("starting");
-						this.hasStarted=true;
+							objectsInGame[i].draw(objectsInGame[i].x+pixPs,objectsInGame[i].y,objectsInGame[i].context);	
+
+						}
+
+						
+
 					}
 
+		
+				}else{
+					clearInterval(CptInterval);
+				}
+			}
 
-					if( (this.hasStarted == true) && (wallClock%this.speed == 0)){
-						if (this.frameIndex < this.numberOfFrames - 1) {	
-							this.frameIndex += 1;
-						}else {
-							this.frameIndex = 0;
+
+			function resetCanvas(){
+
+				var ctx = mainCanvas.getContext("2d");
+
+				ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+				var w = ctx.canvas.width;
+				ctx.canvas.width = 1;
+				ctx.canvas.width = w;
+			}
+
+			class Square{
+					constructor(x,y,context){
+						this.x = x;
+						this.y = y;
+						this.context = context;
+					}
+
+					clear(){
+						this.context.clearRect(this.x, this.y, this.width, this.height);
+					}
+
+					update(){
+							console.log("update");				
+					}
+
+					draw(x,y){
+						console.log("draw contex.canvas.width = "+this.context.canvas.width);
+						if(this.x<=this.context.canvas.width - 50){
+							
+							console.log("draw x = "+this.x);
+							this.context.beginPath();
+							this.context.rect(x,0,50,50);
+							this.context.fillStyle="red";
+							this.context.fill();
+							this.x = x;
+						}else{
+							console.log("clearing Interval in square . draw")
+							//clearInterval(CptInterval);
 						}
 					}
 				}
 
-				draw(x,y){
-					console.log("draw");
-					if(x<=this.context.canvas.width - 50){
-					resetCanvas();
-					this.context.beginPath();
-					this.context.rect(x,0,50,50);
-					this.context.fillStyle="red";
-					this.context.fill();
-					x += pixPs;
-					}else{
-						clearInterval(CptInterval);
-					}
-				}
-			}
+			
 
-		/*	
-		class Rectangle {
-  					constructor(hauteur, largeur) {
-    					this.hauteur = hauteur;
-    					this.largeur = largeur;
-  					}
-  					get area() {
-    					return this.calcArea();
-  					}
+			const square1 = new Square(0,0,mainCanvas.getContext("2d"));
+			const square2 = new Square(0,0,mainCanvas.getContext("2d"));
+			const square3 = new Square(0,0,mainCanvas.getContext("2d"));
 
-  					calcArea() {
-    					return this.largeur * this.hauteur;
-  					}
-			}
+			
+			objectsInGame.push(square1);
+			objectsInGame.push(square2);
+			objectsInGame.push(square3);
+			
 
-		const carré = new Rectangle(10, 10);
-		console.log('LOG REC ' + carré.area);
-*/
+			CptInterval = setInterval(waiter,100);
 
-		const square1 = new Square(0,0);
-		objectsInGame.push(square1);
-		square1.draw(0,0);
+		}
 
 
 		</script>
