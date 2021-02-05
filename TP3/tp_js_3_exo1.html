@@ -19,15 +19,14 @@
 			mainCanvas.addEventListener("click",updateCanvas);
 
 			function getX(text){
-				var res = text.split(":");
-				var res2 = res[1].split(",");
-				return res2[0];
+				var res = "ahah";
+				console.log(text);
+				return res;
 			}
 
 			function getY(text){
-				var res = text.split(":");
-				var res2 = res[2].split("}");
-				return res2[0];
+				var res = text.replace(/^\D+/g, '')[1];
+				return res;
 			}
 
 			function updateCanvas(){
@@ -39,10 +38,12 @@
 					xhr.status === 200 ? console.log(xhr.responseText) : console.error('error');
 				}
 				}
+				
+				console.log(xhr.responseText);
 				xhr.open('GET', 'https://stwom.herokuapp.com/4');
 				xhr.send();
-
-				console.log(getX(xhr.responseText));
+				console.log("x = "+xhr.responseText);
+				//console.log("x = "+getX(xhr.responseText));
 
 
 			}
