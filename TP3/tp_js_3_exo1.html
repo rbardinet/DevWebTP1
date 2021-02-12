@@ -17,32 +17,37 @@
 			mainCanvas=document.getElementById('myCanvas');
 			ctx = mainCanvas.getContext("2d");
 			mainCanvas.addEventListener("click",updateCanvas);
+			para = document.querySelector('p');
 
 			function getX(text){
-				var res = "ahah";
-				console.log(text);
+				var res = text.charAt(5);
 				return res;
 			}
 
 			function getY(text){
-				var res = text.replace(/^\D+/g, '')[1];
+				var res = text.charAt(11);
 				return res;
 			}
 
 			function updateCanvas(){
 				
 				console.log("updating the canvas");
-				const xhr = new XMLHttpRequest()
-				xhr.onreadystatechange = () => {
-				if (xhr.readyState === 4) {
-					xhr.status === 200 ? console.log(xhr.responseText) : console.error('error');
-				}
+				const xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function()  {
+					if (xhr.readyState === 4) {
+						if(xhr.status === 200){
+							console.log(xhr.responseText)
+							//document.querySelector('p').textContent = xhr.responseText;
+							para.textContent = 'x = '+getX(xhr.responseText)+' & y = '+getY(xhr.responseText);
+						} else {
+							console.error('error');
+						} 
+					}
 				}
 				
-				console.log(xhr.responseText);
+				
 				xhr.open('GET', 'https://stwom.herokuapp.com/4');
 				xhr.send();
-				console.log("x = "+xhr.responseText);
 				//console.log("x = "+getX(xhr.responseText));
 
 
@@ -59,6 +64,6 @@
 	<body onload="initMain()">
 
 		<canvas id="myCanvas" width="600" height="600" style="border: 1px solid rgb(140, 107, 202);"></canvas>
-	
+		<p>clickez dans le canva</p>
 
 </body></html>
