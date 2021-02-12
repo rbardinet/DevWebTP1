@@ -34,21 +34,25 @@
 			function updateCanvas(){
 				console.log("init cnvas");
 				fetch(url)
-				.then((resp) => resp.json())
-				.then(function(data) {
-					console.log("data dot ");
-					let res = data.results;
-					return para.textContent = 'x = '+getX(res)+' & y = '+getY(res);
+					.then(
+						function(response) {
+						if (response.status !== 200) {
+							console.log('Looks like there was a problem. Status Code: ' +
+							response.status);
+							return;
+						}
 
-				})
-				.catch(function() {
-
-				});
-
-
+						// Examine the text in the response
+						response.json().then(function(data) {
+							console.log(data);
+							para.textContent = 'x = '+data.x+' & y = '+data.y;
+						});
+						}
+					)
+					.catch(function(err) {
+						console.log('Fetch Error :-S', err);
+					});
 			}
-
-			
 
 		}
 
