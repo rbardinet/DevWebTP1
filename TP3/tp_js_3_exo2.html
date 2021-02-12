@@ -1,0 +1,64 @@
+
+<!-- saved from url=(0050)https://vbarreaud.github.io/JS_TP_1/exo5/exo5.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<title>FETCHAPI</title>
+		<style type="text/css">	
+		</style>
+
+		<script>
+
+		var mainCanvas;
+		var ctx;
+		
+
+		function initMain(){
+
+			mainCanvas=document.getElementById('myCanvas');
+			ctx = mainCanvas.getContext("2d");
+			mainCanvas.addEventListener("click",updateCanvas);
+			para = document.getElementById('para');
+			console.log("init cnvas")
+			const url = "https://stwom.herokuapp.com/4";
+
+			function getX(text){
+				var res = text.charAt(5);
+				return res;
+			}
+
+			function getY(text){
+				var res = text.charAt(11);
+				return res;
+			}
+
+			function updateCanvas(){
+				console.log("init cnvas");
+				fetch(url)
+				.then((resp) => resp.json())
+				.then(function(data) {
+					console.log("data dot ");
+					let res = data.results;
+					return para.textContent = 'x = '+getX(res)+' & y = '+getY(res);
+
+				})
+				.catch(function() {
+
+				});
+
+
+			}
+
+			
+
+		}
+
+
+		</script>
+
+	</head>
+	<body onload="initMain()">
+
+		<canvas id="myCanvas" width="100" height="100" style="border: 1px solid rgb(140, 107, 202);"></canvas>
+		<p id='para'>clickez dans le canva</p>
+
+</body></html>
