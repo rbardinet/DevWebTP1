@@ -12,8 +12,15 @@ function randCoord() {
 onmessage = function(e) {
     color = e.data;
     console.log("received color = "+color);
+    rtime();
   }
 
-setInterval(() => {
+
+function rtime(){
+
     postMessage(randCoord());
-}, 500);
+    console.log("message sent from worker");
+
+    setTimeout(() => {rtime()}, Math.floor(Math.random() * 500));
+
+}
