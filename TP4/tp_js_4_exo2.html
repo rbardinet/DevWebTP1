@@ -1,0 +1,54 @@
+
+<!-- saved from url=(0050)https://vbarreaud.github.io/JS_TP_1/exo5/exo5.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<title>FETCHAPI</title>
+		<style type="text/css">	
+		</style>
+
+		<script>
+
+		function initMain(){
+			// Box width
+			var bw = 400;
+			// Box height
+			var bh = 400;
+			// Padding
+			var p = 00;
+			var canvas = document.getElementById("myCanvas");
+			var context = canvas.getContext("2d");
+			
+			function drawBoard(){
+			for (var x = 0; x <= bw; x += 40) {
+				context.moveTo(0.5 + x + p, p);
+				context.lineTo(0.5 + x + p, bh + p);
+				console.log("in drawboard");
+			}
+
+			for (var x = 0; x <= bh; x += 40) {
+				context.moveTo(p, 0.5 + x + p);
+				context.lineTo(bw + p, 0.5 + x + p);
+			}
+			context.strokeStyle = "black";
+			context.stroke();
+
+			}
+
+			function init(){
+				drawBoard();
+			}
+
+			init();
+
+		}	
+
+
+		</script>
+
+	</head>
+	<body onload="initMain()">
+
+		<canvas id="myCanvas" width="400" height="400" style="border: 1px solid rgb(140, 107, 202);"></canvas>
+		<p id='para'>clickez dans le canva</p>
+
+</body></html>
