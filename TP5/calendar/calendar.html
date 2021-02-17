@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendrier</title>
+    <style>
+      html {
+        font-family: sans-serif;
+      }
+
+      body {
+        margin: 0 auto;
+        max-width: 1024px;
+      }
+
+      main {
+        padding: 20px;
+      }
+
+      header, footer {
+        background: cyan;
+        padding: 20px;
+        border: 1px solid black;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      form {
+        font-size: 0.8rem;
+      }
+
+      .personal-greeting {
+        font-weight: bold;
+      }
+    </style>
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Calendrier</h1>
+    
+      <form>
+        <div class="remember">
+          <label for="entername">Enter Calendar URL</label>
+          <input id="entername" type="text" required>
+          <input id="submitname" type="submit" value="Look up URL">
+        </div>
+        <div class="rememberFile">
+            <label for="entername">Open a personal file</label>
+            <button onclick="openFile(dispFile)">Open a file</button>
+            <pre id="contents"></pre>
+        </div>
+        <div class="forget">
+          <label for="forgetname">Remove calendar from DB?</label>
+          <input id="forgetname" type="reset" value="Remove">
+        </div>
+      </form>
+    
+    </header>
+
+    <main>
+
+      <p class="personal-greeting">cqlendqr</p>
+
+    </main>
+
+    <footer>
+      <p>Copyright nobody. Use the code as you like.</p>
+    </footer>
+  </body>
+</html>
