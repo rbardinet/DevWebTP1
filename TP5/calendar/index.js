@@ -9,35 +9,35 @@ const forgetBtn = document.querySelector('#forgetname');
 const h1 = document.querySelector('h1');
 const personalGreeting = document.querySelector('.personal-greeting');
 
+var file;
+
 // Empêcher le form d'être soumis
 form.addEventListener('submit', function(e) {
     e.preventDefault();
   });
 
 // exécuter la fonction quand le bouton 'Say hello' est cliqué
-submitBtn.addEventListener('click', function() {
+submitBtn.addEventListener('click', async function() {
     // récupérer le fichier à l'adresse donnée
     console.log("Clicked on URL fetch button");
     var url = nameInput.value;
-    fetch(url)
+    file = await fetch(url)
         .then(
             function(response) {
-            if (response.status !== 200) {
-                console.log('Looks like there was a problem. Status Code: ' +
-                response.status);
-                return;
-            }
+                if (response.status !== 200) {
+                    console.log('Looks like there was a problem. Status Code: ' +
+                    response.status);
+                    return;
+                }
+                return response.json().textContent;
 
-            // Examine the text in the response
-            response.json().then(function(data) {
-                console.log(data);
-                para.textContent = 'x = '+data.x+' & y = '+data.y;
-            });
             }
         )
         .catch(function(err) {
             console.log('Fetch Error :-S', err);
         });
+
+        console.log(file);
   });
 
 
