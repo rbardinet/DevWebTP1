@@ -21,14 +21,14 @@ submitBtn.addEventListener('click', async function() {
     // récupérer le fichier à l'adresse donnée
     console.log("Clicked on URL fetch button");
     var url = nameInput.value;
-    file = await fetch(url)
-        .then(
+    response = await fetch(url);
+    file = await response.then(
             function(response) {
                 if (response.status !== 200) {
                     console.log('Looks like there was a problem. Status Code: ' +
                     response.status);
                     return;
-                }
+                }/////////////////
                 return response.json().textContent;
 
             }
@@ -37,6 +37,7 @@ submitBtn.addEventListener('click', async function() {
             console.log('Fetch Error :-S', err);
         });
 
+        
         console.log(file);
   });
 
