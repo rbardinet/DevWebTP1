@@ -17,30 +17,32 @@ form.addEventListener('submit', function(e) {
   });
 
 // exécuter la fonction quand le bouton 'Say hello' est cliqué
-submitBtn.addEventListener('click', async function() {
-    // récupérer le fichier à l'adresse donnée
-    console.log("Clicked on URL fetch button");
-    var url = nameInput.value;
-    response = await fetch(url);
-    file = await response.then(
-            function(response) {
-                if (response.status !== 200) {
-                    console.log('Looks like there was a problem. Status Code: ' +
-                    response.status);
-                    return;
-                }/////////////////
-                return response.json().textContent;
 
-            }
-        )
-        .catch(function(err) {
-            console.log('Fetch Error :-S', err);
-        });
+submitBtn.addEventListener('click', fetcher);
 
-        
-        console.log(file);
-  });
 
+async function fetcher(){
+  // récupérer le fichier à l'adresse donnée
+  console.log("Clicked on URL fetch button");
+  var url = nameInput.value;
+  file = await fetch(url)
+      .then(
+          function(response) {
+              if (response.status !== 200) {
+                  console.log('Looks like there was a problem. Status Code: ' +
+                  response.status);
+                  return;
+              }
+          }
+      )
+      .then(response => response.text())
+      .then(textString => {
+        console.log(textString);
+      })
+      .catch(function(err) {
+          console.log('Fetch Error :-S', err);
+      });
+}
 
   // exécuter la fonction quand le bouton 'Forget' est cliqué
 forgetBtn.addEventListener('click', function() {
